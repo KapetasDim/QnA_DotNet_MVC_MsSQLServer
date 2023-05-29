@@ -1,0 +1,7 @@
+--Κάθε φορά που φτιάχνω πίνακα:
+
+1) --Update Database (update Models folder)
+scaffold-dbcontext -provider Microsoft.EntityFrameworkCore.SqlServer -connection "Data Source=DESKTOP-19UHFTB\MSSQLSERVER_01; Initial catalog=QnA_DotNet_MVC_MsSQLServer_DB; trusted_connection=yes" -outputDir "Models" -ContextDir "Data" -DataAnnotations -Force
+
+2) (για να δω τα δεδομένα σε σελίδα πρέπει να φτιάξω controller χρησιμοποιώντας το Model του table)
+   (στη δημιουργία Controller αν διαλέξω template MVC Controller with views using EF, στο Model Class βάζω table (.Models) και Data Context Class βάζω τη βάση μου (.Data) (όχι ApplicationDbContext)

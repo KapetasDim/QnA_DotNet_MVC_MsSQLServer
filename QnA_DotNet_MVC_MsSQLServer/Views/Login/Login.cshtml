@@ -1,0 +1,40 @@
+﻿@model QnA_DotNet_MVC_MsSQLServer.Models.UserTable
+
+@{
+    Layout = null;
+}
+
+@*<link rel="stylesheet" href="/css/bootswatch.min.css" />*@
+<link rel="stylesheet" href="/css/bootstrap.css" />
+
+<div class="container" style="height:100%">
+    <div class="container" style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        
+        <div style="text-align:center; margin-bottom:4%;">
+            <img src="~/templogo.png" width="300px" height="200px" />
+        </div>
+        
+        <form method="post" asp-controller="Login" asp-action="Login">         
+            <div class="form-group col-lg-4 mx-auto">
+                @*   <label for="">Username</label>*@
+                <input class="form-control input-sm" asp-for="Username" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:1%">
+                @*    <label for="">Password</label>*@
+                <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:1%">
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </div>
+
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:2%">
+                <h6 class="text-danger">@ViewBag.Message</h6>
+            </div>
+        </form>
+    
+    </div>
+</div>

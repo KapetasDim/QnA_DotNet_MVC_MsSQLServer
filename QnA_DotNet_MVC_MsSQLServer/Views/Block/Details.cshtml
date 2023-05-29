@@ -1,0 +1,129 @@
+﻿@model QnA_DotNet_MVC_MsSQLServer.Models.BlockTable
+
+@{
+    ViewData["Title"] = "Details";
+    List<BlockTable> answers_block_list = new List<BlockTable>();
+    answers_block_list = ViewBag.answers_block_list;
+    var contextUsers = ViewBag.contextUsers;
+}
+
+@{
+    #region Show Question Details
+}
+
+<h1>Questio Details</h1>
+
+<div>
+    <h4>Block</h4>
+    <hr />
+    <dl class="row">
+
+        @{/*
+        <dt class="col-sm-2">
+            <h5>Block Id:</h5>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.id)
+        </dd>
+        <dt class="col-sm-2">
+            <h5>Is Answer:</h5>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.isAnswer)
+        </dd>
+        <dt class="col-sm-2">
+            <h5>Is Answer Block Id:</h5>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.is_answer_to_block_id)
+        </dd>
+
+        */
+       }
+
+        <dt class="col-sm-2">
+            <h5>Posted By User:</h5>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt class="col-sm-2">
+            <h5>Title:</h5>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BlockTitle)
+        </dd>
+        <dt class="col-sm-2">
+            <h5>Text:</h5>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+        <dt class="col-sm-2">
+            <h5>Date Posted:</h5>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatePosted)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Answer" asp-route-id="@Model?.Id">Answer</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@{
+#endregion
+}
+
+@{
+    #region Show Answers
+}
+
+<br />
+<br />
+<br />
+<h1>Answers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                User Id
+            </th>
+            <th>
+                Question Title
+            </th>
+            <th>
+                Post Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @answers_block_list)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlockTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatePosted)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Answer" asp-route-id="@item.Id">Answer</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    #endregion
+}

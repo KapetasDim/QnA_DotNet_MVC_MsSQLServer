@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.EntityFrameworkCore;
+@using QnA_DotNet_MVC_MsSQLServer.Data;
+@using QnA_DotNet_MVC_MsSQLServer.Models;
+@{
+
+    QnA_DotNet_MVC_MsSQLServer_DBContext db = new QnA_DotNet_MVC_MsSQLServer_DBContext();
+    var blocks = db.BlockTables.Where(c => c.IsAnswer == false).ToList();
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    @*<input type="button" value="Create New" onclick="location.href='@Url.Action("Create", "Blocks")'" />
+    <a class="nav-link text-dark" asp-area="" asp-controller="Block" asp-action="Index">Blocks</a>*@
+    <input type="button" value="Create New" onclick="location.href='@Url.Action("Create", "Block")'" />
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                User Id
+            </th>
+            <th>
+                Question Title
+            </th>
+            <th>
+                Post Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in blocks) {
+        <tr>
+            <td>
+                @item.UserId
+            </td>
+            <td>
+                @item.BlockTitle
+            </td>
+            <td>
+                @item.DatePosted
+            </td>
+             <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Answer" asp-route-id="@item.Id">Answer</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,66 @@
+﻿@using QnA_DotNet_MVC_MsSQLServer.Models
+@using QnA_DotNet_MVC_MsSQLServer.Data
+@*@model IEnumerable<QnA_DotNet_MVC_MsSQLServer.Models.BlockTable>*@
+@model QnA_DotNet_MVC_MsSQLServer.Models.BlockTable
+
+
+@{
+    ViewData["Title"] = "Create A New Answer";
+
+    //Block block = (Block)TempData["blockToAswer"];
+    //Block block = (Block)ViewData["blockToAswer"];
+    BlockTable block = new BlockTable();
+    block = ViewBag.blockToAswer;
+    
+    
+    //Block block = new Block()
+    //        {
+    //            id = temp_block.id,
+    //            user_id = temp_block.user_id,
+    //            block_title = temp_block.block_title,
+    //            text = temp_block.text,
+    //            date_posted = temp_block.date_posted,
+    //            isAnswer = temp_block.isAnswer,
+    //            is_answer_to_block_id = temp_block.is_answer_to_block_id,
+    //        };
+}
+
+<h4>You Are Currently Answering To:</h4>
+<h5>User: @block.UserId</h5>
+<h5>Question Title: @block.BlockTitle</h5>
+<h5>Question: @block.Text</h5>
+<br>
+<h3>Create A New Answer</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Answer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="IsAnswerToBlockId" value="@block.Id" />
+
+            <div class="form-group">
+                <h5h>Answer Title:</h5h>
+                <input asp-for="BlockTitle" class="form-control" />
+                <span asp-validation-for="BlockTitle" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <h5h>Answer:</h5h>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Answer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
