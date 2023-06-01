@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using QnA_DotNet_MVC_MsSQLServer.Models;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Mvc;
+@using System.Diagnostics;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+@using Microsoft.AspNetCore.Authentication;
+@using System.Web;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +33,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Block" asp-action="Index">Blocks</a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav right">
+                        @if (ViewBag.userSession == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="CreateUser1">Create User</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <h5>Welcome @ViewBag.userSession</h5>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

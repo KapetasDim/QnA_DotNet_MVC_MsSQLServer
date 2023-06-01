@@ -7,6 +7,16 @@
 
     QnA_DotNet_MVC_MsSQLServer_DBContext db = new QnA_DotNet_MVC_MsSQLServer_DBContext();
     var blocks = db.BlockTables.Where(c => c.IsAnswer == false).ToList();
+
+
+    string username = ViewBag.userSession;
+    UserTable user = new UserTable();
+    bool userNull = true;
+    @if (username != null)
+    {
+        user = db.UserTables.FirstOrDefault(t => t.Username == username);
+        userNull = user == null;
+    }
 }
 
 @{
@@ -45,11 +55,19 @@
             <td>
                 @item.DatePosted
             </td>
-             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Answer" asp-route-id="@item.Id">Answer</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <td>
+                    @if (!userNull)
+                    {
+                        @if (user.Id == item.UserId)
+                        {
+
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <a> | </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <a> | </a>
+
+                        }
+                    }
+                    <a asp-action="Answer" asp-route-id="@item.Id">Answer</a> <a> | </a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }

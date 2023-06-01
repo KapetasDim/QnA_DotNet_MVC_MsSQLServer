@@ -35,6 +35,16 @@
                 <h6 class="text-danger">@ViewBag.Message</h6>
             </div>
         </form>
+        <form method="post" asp-controller="Login" asp-action="CreateUser1">
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:2%">
+                <button type="submit" class="btn btn-primary w-100">Create User</button>
+            </div>
+        </form>
+        <form method="post" asp-controller="Home" asp-action="Index">
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:2%">
+                <button type="submit" class="btn btn-primary w-100">Home</button>
+            </div>
+        </form>
     
     </div>
 </div>

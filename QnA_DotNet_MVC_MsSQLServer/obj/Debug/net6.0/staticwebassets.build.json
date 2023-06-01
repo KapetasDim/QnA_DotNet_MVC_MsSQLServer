@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WAOU6kxVfDll/ole2wC9L0bLXE74HfYAkFAtf8/BN4c=",
+  "Hash": "7c9zh8CuagOjM++B4lsYKLrWDDkyupbEkjXV9TPEHmo=",
   "Source": "QnA_DotNet_MVC_MsSQLServer",
   "BasePath": "_content/QnA_DotNet_MVC_MsSQLServer",
   "Mode": "Default",
@@ -2089,6 +2089,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "F:\\DotNet_Projects\\QnA_DotNet_MVC_MsSQLServer\\QnA_DotNet_MVC_MsSQLServer\\wwwroot\\templogo.png",
+      "SourceId": "QnA_DotNet_MVC_MsSQLServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\DotNet_Projects\\QnA_DotNet_MVC_MsSQLServer\\QnA_DotNet_MVC_MsSQLServer\\wwwroot\\",
+      "BasePath": "_content/QnA_DotNet_MVC_MsSQLServer",
+      "RelativePath": "templogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\templogo.png"
     }
   ]
 }

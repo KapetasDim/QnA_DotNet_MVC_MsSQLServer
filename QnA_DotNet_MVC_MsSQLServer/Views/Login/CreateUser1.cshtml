@@ -1,0 +1,68 @@
+﻿@model QnA_DotNet_MVC_MsSQLServer.Models.UserTable
+
+@{
+    Layout = null;
+}
+
+@*<link rel="stylesheet" href="/css/bootswatch.min.css" />*@
+<link rel="stylesheet" href="/css/bootstrap.css" />
+
+<div class="container" style="height:100%">
+    <div class="container" style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        
+        <div style="text-align:center; margin-bottom:4%;">
+            <img src="~/templogo.png" width="300px" height="200px" />
+        </div>
+        
+        <form method="post" asp-controller="Login" asp-action="CreateUser">
+            <div class="form-group col-lg-4 mx-auto">
+                <input class="form-control input-sm" asp-for="Username" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:1%">
+                <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-4 mx-auto">
+                <input class="form-control input-sm" asp-for="FirstName" class="form-control" placeholder="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-4 mx-auto">
+                <input class="form-control input-sm" asp-for="LastName" class="form-control" placeholder="LastName" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-4 mx-auto">
+                <input class="form-control input-sm" asp-for="Residence" class="form-control" placeholder="Residence" />
+                <span asp-validation-for="Residence" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-4 mx-auto">
+                <input class="form-control input-sm" asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-4 mx-auto">
+                <input class="datetime input-sm" asp-for="DateOfBirth" class="form-control" placeholder="Date Of Birth" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:1%">
+                <button type="submit" class="btn btn-primary w-100">Create User</button>
+            </div>
+
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:2%">
+                <h6 class="text-danger">@ViewBag.Message</h6>
+            </div>
+        </form>
+        <form method="post" asp-controller="Login" asp-action="Login1">
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:2%">
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </div>
+        </form>
+        <form method="post" asp-controller="Home" asp-action="Index">
+            <div class="form-group col-lg-4 mx-auto" style="margin-top:2%">
+                <button type="submit" class="btn btn-primary w-100">Home</button>
+            </div>
+        </form>
+    
+    </div>
+</div>

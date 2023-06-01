@@ -18,12 +18,8 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="@Model.Id" />
+            <input type="hidden" asp-for="@Model.UserId" />
             <h1>EDIT BLOCK: @Model.BlockTitle</h1>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="BlockTitle" class="control-label"></label>
                 <input asp-for="BlockTitle" class="form-control" />

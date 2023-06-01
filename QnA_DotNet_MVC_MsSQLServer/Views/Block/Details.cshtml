@@ -1,10 +1,21 @@
-﻿@model QnA_DotNet_MVC_MsSQLServer.Models.BlockTable
+﻿@using QnA_DotNet_MVC_MsSQLServer.Data;
+@model QnA_DotNet_MVC_MsSQLServer.Models.BlockTable
 
 @{
+    QnA_DotNet_MVC_MsSQLServer_DBContext db = new QnA_DotNet_MVC_MsSQLServer_DBContext();
     ViewData["Title"] = "Details";
     List<BlockTable> answers_block_list = new List<BlockTable>();
     answers_block_list = ViewBag.answers_block_list;
     var contextUsers = ViewBag.contextUsers;
+
+    string username = ViewBag.userSession;
+    UserTable user = new UserTable();
+    bool userNull = true;
+    @if (username != null)
+	{
+        user = db.UserTables.FirstOrDefault(t => t.Username == username);
+        userNull = user == null;
+    }
 }
 
 @{
@@ -68,7 +79,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Answer" asp-route-id="@Model?.Id">Answer</a> |
     <a asp-action="Index">Back to List</a>
 </div>
@@ -115,10 +125,18 @@
                     @Html.DisplayFor(modelItem => item.DatePosted)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Answer" asp-route-id="@item.Id">Answer</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (!userNull)
+                    {
+                        @if (user.Id == item.UserId)
+                        {
+
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <a> | </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <a> | </a>
+
+                        }
+                    }
+                    <a asp-action="Answer" asp-route-id="@item.Id">Answer</a> <a> | </a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>
             </tr>
         }

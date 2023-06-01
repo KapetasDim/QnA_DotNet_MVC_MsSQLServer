@@ -4,6 +4,18 @@ using QnA_DotNet_MVC_MsSQLServer.Data;
 using QnA_DotNet_MVC_MsSQLServer.Models;
 using System.Security.Claims;
 
+
+////refirect to login page if not loged in
+//var _userSession = HttpContext.Session.GetString("userSession");
+//if (_userSession == null)
+//    return RedirectToAction("Login", "Login");
+//string userName = _userSession.ToString();
+//ViewBag.userSession = HttpContext.Session.GetString("userSession");
+//if (userName != null)
+//{
+//    return RedirectToAction("Login", "Login");
+//}
+
 namespace QnA_DotNet_MVC_MsSQLServer.Controllers
 {
     public class BlockController : Controller
@@ -12,27 +24,33 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
 
         public int GetUserId()
         {
-            //var claimsId = (ClaimsIdentity)User.Identity;
-            //var claims = claimsId.FindFirst(ClaimTypes.NameIdentifier);
-            //string userID = claims.Value;
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
 
-            //if (userID == null) userID = "empty";
+            int userId = -1;
+            string userName = HttpContext.Session.GetString("userSession").ToString();
+            if (userName != null)
+            {
+                var user = db.UserTables.FirstOrDefault(t => t.Username == userName);
+                if(user != null)
+                    userId = user.Id;
+            }
 
-            //return userID;
-
-            //MORE FUNCTIONALITY IS NEEDED HERE TO ACTUALLY GET THER USER ID
-            return 0;
+            return userId;
         }
 
         // GET: Blocks
         public async Task<IActionResult> Index()
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
+
             return View(await db.BlockTables.Where(x => x.IsAnswer.Equals(false)).ToListAsync());
         }
 
         // GET: Blocks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
+
             if (id == null || db.BlockTables == null)
             {
                 return NotFound();
@@ -55,6 +73,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         // GET: Blocks/Create
         public IActionResult Create()
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             return View("Create");
         }
 
@@ -65,6 +84,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BlockTitle,Text")] BlockTable block)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             int userID = GetUserId();
 
             block.UserId = userID;
@@ -91,14 +111,12 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
                 }
             }
             return RedirectToAction("Details", "Block", new { id = block.Id });
-
-
-            return View(block);
         }
 
         // GET: Blocks/Answer
         public async Task<IActionResult> Answer(int? id)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             if (id == null || db.BlockTables == null)
             {
                 return NotFound();
@@ -126,6 +144,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         public async Task<IActionResult> Answer([Bind("Id,UserId,BlockTitle,Text")] BlockTable block,
             string IsAnswerToBlockId)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             block.IsAnswer = true;
             block.IsAnswerToBlockId = int.Parse(IsAnswerToBlockId);
             block.DatePosted = DateTime.Now;
@@ -158,6 +177,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         // GET: Blocks/Edit
         public IActionResult Edit(int? id)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             if (id == null || id == -1)
             {
                 return RedirectToAction(nameof(Index));
@@ -173,6 +193,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int Id, [Bind("Id,UserId,BlockTitle,Text")] BlockTable block)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
 
             block.DatePosted = DateTime.Now;
 
@@ -216,6 +237,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         // GET: Blocks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             if (id == null || db.BlockTables == null)
             {
                 return NotFound();
@@ -236,6 +258,7 @@ namespace QnA_DotNet_MVC_MsSQLServer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            ViewBag.userSession = HttpContext.Session.GetString("userSession");
             if (db.BlockTables == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Block'  is null.");
